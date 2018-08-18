@@ -8,7 +8,7 @@
     <body>
         <div class="wrapper">
 			<h1>ECMAScript 6 Features</h1>
-			<p>"WTF is ECMAScript? Where did JavaScript go?"<br /><a target="_blank" href="https://medium.freecodecamp.org/whats-the-difference-between-javascript-and-ecmascript-cba48c73a2b5">Difference Between Javascript and Ecmascript</a></p>
+			<p>"WTF is ECMAScript? Where did JavaScript go?"<br /><a target="_blank" href="https://medium.freecodecamp.org/whats-the-difference-between-javascript-and-ecmascript-cba48c73a2b5">Difference Between Javascript and ECMAscript</a></p>
 			<p>
 				tl;dr
 			</p>
@@ -343,6 +343,20 @@
 					// 0<br />
 					console.log(names);<br />
 					// {}
+				</code>
+				<h3>Set to Array</h3>
+				<code>
+					let dudes = ['Josh', 'Ava', 'Sally', 'Talia', 'Haley'];<br /><br />
+
+					// converting to a set<br />
+					let realDudes = new Set(dudes);<br /><br />
+
+					console.log(realDudes);<br />
+					// {'Josh', 'Ava', 'Sally', 'Talia', 'Haley'}<br /><br />
+
+					// converting to an array<br />
+					console.log([...realDudes]);<br />
+					// ['Josh', 'Ava', 'Sally', 'Talia', 'Haley']
 				</code>
 			</section>
 			<section>
