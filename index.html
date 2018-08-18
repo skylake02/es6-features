@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ECMAScript</title>
+        <link rel="stylesheet" href="style.css"/>
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+			<h1>ECMAScript 6 Features</h1>
+			<p>"WTF is ECMAScript? Where did JavaScript go?"<br /><a target="_blank" href="https://medium.freecodecamp.org/whats-the-difference-between-javascript-and-ecmascript-cba48c73a2b5">Difference Between Javascript and Ecmascript</a></p>
+			<p>
+				tl;dr
+			</p>
+			<p>Javascript is a "dialect" of ECMAScript.<br />ECMAScript is a general purpose scripting language.<br />JavaScript, on the other hand, is based on ECMAScript, but is a scripting language commonly run in browsers.</p>
+			<p>
+				ECMAScript 6 has some new and shiny features to help write more concise scripts.
+			</p>
+			<section>
+				<h2><span>const</span> and <span>let</span> vs. <span>var</span></h2>
+				<code><span>const</span> foo = true;<br /> // variable is unchangeable upon binding<br /><br /><span>let</span> bar = false;<br /> // similar to var but not completely</code>
+				<p>
+					<span>let</span> respects block scope, while <span>var</span> does not
+				</p>
+				<code><span>let</span> foo = 5;<br/><br/>if (true) {<br/>&nbsp;&nbsp;<span>let</span> foo = 10;<br />&nbsp;&nbsp;console.log(foo);<br/>&nbsp;&nbsp;// 10<br/>} <br/><br/>console.log(foo);<br/>// 5</code>
+				<code><span>var</span> foo = 5;<br/><br/>if (true) {<br/>&nbsp;&nbsp;<span>var</span> foo = 10;<br />&nbsp;&nbsp;console.log(foo);<br/>&nbsp;&nbsp;// 10<br/>} <br/><br/>console.log(foo);<br/>// 10</code>
+			</section>
+			<section>
+				<h2>default function parameters</h2>
+				<p>
+					parameters can now have a default value if one is not passed to a function that asks for one
+				</p>
+				<h3>old way</h3>
+				<code>
+					function add (a, b) {<br />
+						&nbsp;&nbsp;if (a === undefined) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;a = 2;<br />
+						&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;if (b === undefined) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;b = 1;<br />
+						&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;return a + b;<br />
+					}<br /><br />
+					console.log(add());<br />
+					// 3
+				</code>
+				<h3>new way</h3>
+				<code>
+					function add (a=2, b=1) {<br />
+						&nbsp;&nbsp;return a + b;<br />
+					}<br /><br />
+					console.log(add());<br />
+					// 3
+				</code>
+			</section>
+			<section>
+				<h2>the spread operator (<span>...</span>)</h2>
+				<p>
+					an operator that expands iteratable data structures (e.g. arrays)
+				</p>
+				<code>
+					function sum (a, b, c) {<br />
+						&nbsp;&nbsp;return a + b + c;<br />
+					}<br /><br />
+
+					let arr1 = [1, 2, 3];<br /><br />
+
+					console.log(<span>...</span>arr1);<br />
+					// 1 2 3<br />
+					// these are not part of a string either<br />
+					// they are numbers<br /><br />
+
+					console.log(sum(<span>...</span>arr1));<br />
+					// 6<br />
+					// the array can be plugged in as arguments<br /><br />
+
+					console.log([<span>...</span>arr1, 4, 5, 6])<br />
+					// [1, 2, 3, 4, 5, 6]<br />
+					// a better way to concatenate
+				</code>
+			</section>
+			<section>
+				<h2>object literal enhancements</h2>
+				<h3 style="margin-top: 20px;">old way</h3>
+				<code>
+					var name = 'Jon',<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;age = 21,<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;man = {<br />
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: name,<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;age: age,<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say: function (msg) {<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(msg);<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};<br /></span>
+						&nbsp;&nbsp;&nbsp;&nbsp;};<br /><br />
+
+					console.log(man.name);<br />
+					// 'Jon'<br />
+					console.log(man.say('Hello, sir!'));<br />
+					// 'Hello, sir!'<br />
+				</code>
+				<h3>new way</h3>
+				<code>
+					let name = 'Jon',<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;age = 21,<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;man = {<br />
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name, age,<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say (msg) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(msg;<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /></span>
+						&nbsp;&nbsp;&nbsp;&nbsp;};<br /><br />
+
+					console.log(man.name);<br />
+					// 'Jon'<br />
+					console.log(man.say('Hello, sir!'));<br />
+					// 'Hello, sir!'<br />
+				</code>
+			</section>
+			<section>
+				<h2>template strings (<span>`back ticks`</span>)</h2>
+				<p>a better way to embed variables into strings</p>
+				<code>
+					let name = 'Sam';<br /><br />
+
+					console.log('Hello, I am ' + name + '! Nice to meet you!');<br />
+					// 'Hello, I am Sam! Nice to meet you!'<br /><br />
+
+					console.log(<span>`</span>Greetings! My name is <span>${name}</span>! How are you?<span>`</span>);<br />
+					// 'Greetings! My name is Sam! How are you?'
+				</code>
+			</section>
+			<section>
+				<h2>arrow functions (<span>=></span>)</h2>
+				<p>a different way to write functions</p>
+				<h3>no parameters</h3>
+				<code>
+					let greet = function() {<br />
+						&nbsp;&nbsp;console.log('Hello!');<br />
+					}<br /><br />
+
+					greet();<br />
+					// 'Hello!'
+				</code>
+				<code>
+					let greet = () <span>=></span> {<br />
+						&nbsp;&nbsp;console.log('Greetings!');<br />
+					}<br /><br />
+
+					greet();<br />
+					// 'Greetings!'
+				</code>
+				<code>
+					let greet = () <span>=></span> console.log('Greetings!');<br /><br />
+
+					greet();<br />
+					// 'Greetings!'
+				</code>
+				<h3>with parameters</h3>
+				<code>
+					let greet = function(name) {<br />
+						&nbsp;&nbsp;console.log(`Hello, ${name}.`);<br />
+					}<br /><br />
+
+					greet('Dan');<br />
+					// 'Hello, Dan.'
+				</code>
+				<code>
+					let greet = (name) => console.log(`Greetings, ${name}.`);<br /><br />
+
+					greet('Bob');<br />
+					// 'Greetings, Bob.'
+				</code>
+				<h3>returning</h3>
+				<code>
+					let greet = function() {<br />
+						&nbsp;&nbsp;return 'Hello!';<br />
+					}<br /><br />
+
+					console.log(greet());<br />
+					// 'Hello!'
+				</code>
+				<code>
+					let greet = () => {<br />
+						&nbsp;&nbsp;return 'Hello!'<br />
+					};<br /><br />
+
+					console.log(greet());<br />
+					// 'Hello!'
+				</code>
+				<code>
+					let greet = () => 'Hello!';<br /><br />
+
+					console.log(greet());<br />
+					// 'Hello!'
+				</code>
+				<p>
+					<span>return</span> isn't even needed
+				</p>
+				<h3 style="margin-top:30px;">lexical <span>this</span></h3>
+				<p>
+					<span>this</span> refers to the <span>this</span> of the encapsulating function
+				</p>
+				<code>
+					let boi = {<br />
+						&nbsp;&nbsp;name: 'Frank',<br />
+						&nbsp;&nbsp;run(x) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;let _this = this;<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;window.setInterval(function() {<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(`I, ${_this.name}, ran ${x} meters!`);<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}, 1000);<br />
+						&nbsp;&nbsp;}<br />
+					}<br /><br />
+
+					boi.run(100);<br />
+					// 'I, Frank, ran 100 meters!'
+				</code>
+				<p>
+					a <span>_this</span> variable has to be made to reach outside the scope of the <span>setInterval</span> callback function
+				</p>
+				<code>
+					let boi = {<br />
+						&nbsp;&nbsp;name: 'Frank',<br />
+						&nbsp;&nbsp;run(x) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;window.setInterval(<span>() =></span> {<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(`I, ${this.name}, ran ${x} meters!`);<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}, 1000);<br />
+						&nbsp;&nbsp;}<br />
+					}<br /><br />
+
+					boi.run(100);<br />
+					// 'I, Frank, ran 100 meters!'
+				</code>
+				<p>
+					however, arrow functions do not bind their own <span>this</span>, and therefore have <span>this</span> set to their encapsulating function
+				</p>
+			</section>
+			<section>
+				<h2>new string methods</h2>
+				<h3 style="margin-top:10px;"><span><i>String</i>.repeat()</span></h3>
+				<code>
+					let str = 'Whoa dude! '<br /><br />
+
+					console.log(str.repeat(5));<br />
+					// 'Whoa dude! Whoa dude! Whoa dude! Whoa dude! Whoa dude!'
+				</code>
+				<h3><span><i>String</i>.startsWith('')</span></h3>
+				<code>
+					let str = 'Goodbye, mate.'<br /><br />
+
+					console.log(str.startsWith('Good'));<br />
+					// true
+				</code>
+				<p>
+					the starting position can also be passed in, with the beginning starting at 0
+				</p>
+				<code>
+					let str = 'Goodbye, mate.'<br /><br />
+
+					console.log(str.startsWith('mate', 9));<br />
+					// true
+				</code>
+				<h3><span><i>String</i>.endsWith('')</span></h3>
+				<p>
+					same thing here, just the reverse
+				</p>
+				<code>
+					let str = 'Goodbye, mate.';<br /><br />
+
+					console.log(str.endsWith('mate.', str.length));<br />
+					// true
+				</code>
+				<code>
+					let str = 'Goodbye, mate.';<br /><br />
+
+					console.log(str.endsWith('mate.'));<br />
+					// true
+				</code>
+				<p>
+					the two are the same
+				</p>
+				<code>
+					let str = 'Goodbye, mate.'<br /><br />
+
+					console.log(str.endsWith('Goodbye', str.length - 7));<br />
+					// true
+				</code>
+				<h3><span><i>String</i>.includes('')</span></h3>
+				<code>
+					let str = 'My name is Jack!';<br /><br />
+
+					console.log(str.includes('Jack'));<br />
+					// true
+				</code>
+			</section>
+			<section>
+				<h2>sets</h2>
+				<p>
+					a new datatype
+				</p>
+				<h3><span><i>Set</i>.add()</span>, <span><i>Set</i>.size()</span>, <span><i>Set</i>.delete()</span></h3>
+				<code>
+					let names = new Set();<br /><br />
+
+					names.add('Tom').add('Jak').add('Crystal');<br />
+					console.log(names);<br />
+					// {'Tom', 'Jak', 'Crystal'}<br /><br /><br />
+
+
+					names.add('Crystal');<br />
+					console.log(names);<br />
+					// {'Tom', 'Jak', 'Crystal'}<br />
+					// duplicates cannot be made<br /><br /><br />
+
+
+					console.log(names.size);<br />
+					// 3<br /><br /><br />
+
+					names.delete('Tom');<br />
+					console.log(names);<br />
+					// {'Jak', 'Crystal'}<br /><br /><br />
+
+				</code>
+				<p>
+					don't chain <span>.delete()</span>s though
+				</p>
+				<code>
+					let names = new Set();<br /><br />
+
+					names.add('Tom').add('Jak').add('Crystal');<br /><br />
+
+					console.log(names.delete('Tom'));<br />
+					// true<br /><br />
+
+					names.add('Tom');<br />
+					names.delete('Tom').delete('Jak');<br />
+					// *Uncaught TypeError*
+				</code>
+				<code>
+					let names = new Set();<br /><br />
+
+					names.add('Tom').add('Jak').add('Crystal');<br /><br />
+
+					names.clear();<br />
+					console.log(names.size);<br />
+					// 0<br />
+					console.log(names);<br />
+					// {}
+				</code>
+			</section>
+			<section>
+				<h2>generators</h2>
+
+			</section>
+		</div>
+    </body>
+</html>
